@@ -4,11 +4,69 @@
              x:Class="SafeDriving.Pages.SchedulePage"
              xmlns:viewmodel="clr-namespace:SafeDriving.ViewModel"
              x:DataType="viewmodel:ScheduleViewModel"
+             NavigationPage.HasBackButton="False"
+             Shell.NavBarIsVisible="False"
              Title="SchedulePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <Grid>
+            <StackLayout>
+                <Label 
+                    Text="Расписание"
+                    Margin="0,20,0,0"
+                    HorizontalOptions="Center"
+                    TextColor="#6390E4"
+                    FontSize="24"/>
+
+                <Label 
+                    Text="12/05"
+                    Margin="0,20,0,0"
+                    HorizontalOptions="Center"
+                    TextColor="White"
+                    FontSize="24"/>
+
+                <Grid Margin="0,30,0,0" HorizontalOptions="Center">
+                    <CollectionView
+                        ItemsSource="{Binding Buttons}"
+                        HorizontalScrollBarVisibility="Never"
+                        SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout 
+                                Orientation="Horizontal"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="{x:Type viewmodel:ScheduleButtonViewModel}">
+                                <Grid Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Text="{Binding Text}" HorizontalOptions="Center"/>
+
+                                    <Button 
+                                        Grid.Row="1" 
+                                        Text="{Binding DayNumber}"
+                                        FontSize="14"
+                                        FontAttributes="Bold"
+                                        HeightRequest="35" 
+                                        WidthRequest="35"
+                                        CornerRadius="20"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ScheduleViewModel}}, Path=TapCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Padding="0"
+                                        TextColor="White"
+                                        Background="{Binding Background}"
+                                        HorizontalOptions="Center" 
+                                        VerticalOptions="Start"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+                
+                
+            </StackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

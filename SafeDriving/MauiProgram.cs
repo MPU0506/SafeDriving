@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SafeDriving.Pages;
+using SafeDriving.Service.API;
 using SafeDriving.ViewModel;
 
 namespace SafeDriving;
@@ -16,6 +18,11 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
+
+        builder.Services.AddTransient<IApi>(p =>
+        {
+            return new PolytechApiService("https://e.mospolytech.ru/");
+        });
 
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<MainViewModel>();
