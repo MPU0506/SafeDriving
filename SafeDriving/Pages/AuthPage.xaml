@@ -92,6 +92,7 @@
                 Text="Вход"
                 FontAttributes="Bold"
                 BackgroundColor="#6390E4"
+                Command="{Binding ClickLogin}"
                 TextColor="White"/>
 
         </StackLayout>

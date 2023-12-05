@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SafeDriving.Pages;
+using SafeDriving.Service;
 using SafeDriving.Service.API;
 using SafeDriving.ViewModel;
 
@@ -8,7 +9,6 @@ namespace SafeDriving;
 
 public static class MauiProgram
 {
-    private static readonly string _authToken = "0IwGWvhf%2Bd9UGa7wkj8qTyAM8vW86T7HPzV11B9GNLvxMTZgPEFWacFk%2BbO2lmIVpB4FZl3gw4Gl4vqwmhv0ZvDpXNe5XGYCIDnXsxi%2Ba74OZq1SuJFcSdEIbJ43v4CU8zWhSl4Wn1MG8EJNUiwHDy75090t7ym31uBCuOR2OyY%3D\\";
 
     public static MauiApp CreateMauiApp()
 	{
@@ -23,10 +23,10 @@ public static class MauiProgram
 
         builder.Services.AddTransient<IApi>(p =>
         {
-            var api = new PolytechApiService("https://e.mospolytech.ru/");
-            api.SetAuthToken(_authToken);
-            return api;
+            return new PolytechApiService("https://e.mospolytech.ru/");
         });
+
+        builder.Services.AddSingleton<UserService>();
 
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<MainViewModel>();

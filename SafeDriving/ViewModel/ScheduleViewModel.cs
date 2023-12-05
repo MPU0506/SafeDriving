@@ -34,7 +34,7 @@ namespace SafeDriving.ViewModel
             Task.Run(Init);
         }
 
-        public async Task Init()
+        private async Task Init()
         {
             var schedule = await _api.GetSchedule("231-332");
 

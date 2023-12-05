@@ -6,6 +6,8 @@ namespace SafeDriving.Service.API
     {
         Task<Schedule> GetSchedule(string groupName);
 
+        Task<User> GetUser(string name, string password);
+
         void SetAuthToken(string authToken);
     }
 }

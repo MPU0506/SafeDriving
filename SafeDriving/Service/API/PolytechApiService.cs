@@ -41,11 +41,41 @@ namespace SafeDriving.Service.API
                 }
                 catch(Exception ex)
                 {
-                    string e = ex.Message;
+                    // TODO: Тут по хорошему надо пробросить исключение наверх, и обработать в вызывающем коде 
                 }
             }
 
+            // TODO: Тут по хорошему надо пробросить исключение наверх, и обработать в вызывающем коде 
             return new Schedule();
+        }
+
+        public async Task<User> GetUser(string name, string password)
+        {
+            var queryParams = new Dictionary<string, object>
+            {
+                { "getUser", "" },
+                { "token", _authToken ?? "" }
+            };
+
+            var response = await GetAsync("old/lk_api.php/", queryParams: queryParams);
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    var anonymousObject = JsonConvert.DeserializeAnonymousType(result, new { user = new User()});
+                    return anonymousObject.user;
+                }
+                catch (Exception ex)
+                {
+                    // TODO: Тут по хорошему надо пробросить исключение наверх, и обработать в вызывающем коде 
+                    return new User();
+                }
+            }
+
+            // TODO: Тут по хорошему надо пробросить исключение наверх, и обработать в вызывающем коде 
+            return new User();
         }
 
         private async Task<HttpResponseMessage> GetAsync(string endpoint, Dictionary<string, object> queryParams = null)
@@ -63,5 +93,7 @@ namespace SafeDriving.Service.API
 
             return await _httpClient.GetAsync(uriBuilder.Uri);
         }
+
+       
     }
 }

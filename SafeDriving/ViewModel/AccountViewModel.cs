@@ -1,20 +1,32 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SafeDriving.Service;
 
 namespace SafeDriving.ViewModel
 {
+
+    // TODO: Надо сделать навигацию (см пример AuthViewModel и AuthPage.xaml)
     public partial class AccountViewModel : ObservableObject
     {
         [ObservableProperty]
         private string avatarSource;
 
-        public AccountViewModel()
+        [ObservableProperty]
+        private string fullName;
+
+        private readonly UserService _userService;
+
+        public AccountViewModel(UserService userService)
         {
-            AvatarSource = "https://e.mospolytech.ru/old/img/photos/upc_33acd7a2a52067fb48ecf948c6037e41_1694025553.jpg";
+            _userService = userService;
+            Task.Run(Init);
+        }
+
+        private async Task Init()
+        {
+            var user = _userService.Getuser();
+            AvatarSource = user.Avatar;
+            FullName = user.Name + user.Surname + user.Patronymic;
+            // TODO Продолжить заполнять поля
         }
     }
 }
