@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SafeDriving.Pages.AccountPage"
+             xmlns:viewmodel="clr-namespace:SafeDriving.ViewModel"
+             x:DataType="viewmodel:AccountViewModel"
+             NavigationPage.HasBackButton="False"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#3A3A3A"
+             Title="AccountPage">
+    <ScrollView>
+        <StackLayout>
+            <Frame 
+                Margin="0,40,0,0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Padding="0,0,0,0"
+                CornerRadius="600">
+                <Image
+                    WidthRequest="100"
+                    HeightRequest="100"
+                    Margin="0,0,0,0"
+                    Aspect="AspectFill"
+                    Source="{Binding AvatarSource}"/>
+            </Frame>
+
+            <Label 
+                Margin="0,20,0,0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                FontSize="20"
+                Text="Шелконогов Даниил Глебович"/>
+
+            <Label 
+                Margin="0,10,0,0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                FontSize="12"
+                Text="Студент ~ Бакалавриат"/>
+
+            <Label 
+                Margin="0,10,0,0"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                FontSize="12"
+                Text="Группа 231-332"/>
+
+            <Grid Margin="10,30,10,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Frame 
+                    Margin="15"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    CornerRadius="20"
+                    WidthRequest="140"
+                    HeightRequest="140"
+                    BorderColor="Transparent"
+                    BackgroundColor="#2E2F2E">
+                    <StackLayout>
+                        <ImageButton
+                            Margin="0,10,0,0"
+                            HeightRequest="50"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            BackgroundColor="Transparent"
+                            Source="chat.png"/>
+
+                        <Label 
+                            Margin="0,20,0,0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="чаты"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame 
+                    Margin="15"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    CornerRadius="20"
+                    BorderColor="Transparent"
+                    WidthRequest="140"
+                    HeightRequest="140"
+                    BackgroundColor="#2E2F2E">
+                    <StackLayout>
+                        <ImageButton
+                            Margin="0,10,0,0"
+                            HeightRequest="50"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            BackgroundColor="Transparent"
+                            Source="settings.png"/>
+
+                        <Label 
+                            Margin="0,20,0,0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="настройки"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame 
+                    Margin="15"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    CornerRadius="20"
+                    BorderColor="Transparent"
+                    WidthRequest="140"
+                    HeightRequest="140"
+                    BackgroundColor="#2E2F2E">
+                    <StackLayout>
+                        <ImageButton
+                            Margin="0,10,0,0"
+                            HeightRequest="50"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            BackgroundColor="Transparent"
+                            Source="schedule.png"/>
+
+                        <Label 
+                            Margin="0,20,0,0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="расписание"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame 
+                    Margin="15"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    CornerRadius="20"
+                    BorderColor="Transparent"
+                    WidthRequest="140"
+                    HeightRequest="140"
+                    BackgroundColor="#2E2F2E">
+                    <StackLayout>
+                        <ImageButton
+                            Margin="0,10,0,0"
+                            HeightRequest="50"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            BackgroundColor="Transparent"
+                            Source="orders.png"/>
+
+                        <Label 
+                            Margin="0,20,0,0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="договоры"/>
+                    </StackLayout>
+                </Frame>
+
+
+                <Frame 
+                    Margin="15"
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    CornerRadius="20"
+                    WidthRequest="140"
+                    HeightRequest="140"
+                    BorderColor="Transparent"
+                    BackgroundColor="#2E2F2E">
+                    <StackLayout>
+                        <ImageButton
+                            Margin="0,10,0,0"
+                            HeightRequest="50"
+                            BackgroundColor="Transparent"
+                            Source="graduation.png"/>
+
+                        <Label 
+                            Margin="0,20,0,0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="Успеваимость"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame 
+                    Margin="15"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    CornerRadius="20"
+                    WidthRequest="140"
+                    HeightRequest="140"
+                    BorderColor="Transparent"
+                    BackgroundColor="#2E2F2E">
+                    <StackLayout>
+                        <ImageButton
+                            Margin="0,10,0,0"
+                            HeightRequest="50"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            BackgroundColor="Transparent"
+                            Source="students.png"/>
+
+                        <Label 
+                            Margin="0,20,0,0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="Cтуденты"/>
+                    </StackLayout>
+                </Frame>
+
+
+
+
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
