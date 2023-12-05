@@ -53,12 +53,14 @@
 	  <None Remove="Resources\Images\graduation.png" />
 	  <None Remove="Resources\Images\orders.png" />
 	  <None Remove="Resources\Images\schedule.png" />
+	  <None Remove="Resources\Images\send.png" />
 	  <None Remove="Resources\Images\settings.png" />
 	  <None Remove="Resources\Images\students.png" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.14" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
