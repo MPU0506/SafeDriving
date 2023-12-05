@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SafeDriving.Pages.SchedulePage"
              xmlns:viewmodel="clr-namespace:SafeDriving.ViewModel"
+             xmlns:model="clr-namespace:SafeDriving.Models"
              x:DataType="viewmodel:ScheduleViewModel"
              NavigationPage.HasBackButton="False"
              Shell.NavBarIsVisible="False"
@@ -17,12 +18,29 @@
                     TextColor="#6390E4"
                     FontSize="24"/>
 
-                <Label 
-                    Text="12/05"
-                    Margin="0,20,0,0"
-                    HorizontalOptions="Center"
-                    TextColor="White"
-                    FontSize="24"/>
+                <Grid HorizontalOptions="Center" Margin="0,30,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button 
+                        Grid.Column="0"
+                        Text="День"
+                        HorizontalOptions="Center"
+                        TextColor="White"
+                        BackgroundColor="#2E2F2E"
+                        FontSize="20"/>
+
+                    <Button 
+                        Margin="10,0,0,0"
+                        Grid.Column="1"
+                        Text="Неделя"
+                        HorizontalOptions="Center"
+                        TextColor="White"
+                        BackgroundColor="#2E2F2E"
+                        FontSize="20"/>
+                </Grid>
 
                 <Grid Margin="0,30,0,0" HorizontalOptions="Center">
                     <CollectionView
@@ -64,7 +82,25 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </Grid>
-                
+
+                <Grid>
+                    <CollectionView 
+                        ItemsSource="{Binding SelectedDay.Lessons}"
+                        VerticalScrollBarVisibility="Never"
+                        SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="{x:Type model:Lesson}">
+                                <Grid  Margin="10,10,10,10">
+                                    <Frame>
+                                        <Grid>
+                                            <Label Grid.Row="0" Text="{Binding Name}"/>
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>   
+                </Grid>
                 
             </StackLayout>
         </Grid>

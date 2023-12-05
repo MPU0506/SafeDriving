@@ -1,6 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SafeDriving.ViewModel
 {
@@ -11,10 +9,5 @@ namespace SafeDriving.ViewModel
 
         public string Text { get; set; }
         public string DayNumber { get; set; }
-
-        public DateTime DateTime { get; set; }
-
-
-        
     }
 }

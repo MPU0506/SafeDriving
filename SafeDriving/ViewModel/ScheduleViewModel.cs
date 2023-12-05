@@ -1,18 +1,28 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SafeDriving.Models;
 using SafeDriving.Service.API;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
 namespace SafeDriving.ViewModel
 {
+    // TODO : Почему то иногда пары дублируются в JSON-е, надо разобратся.
 
+    // TODO : Нужно сделать красивый вывод информации о паре 
+    // (не знаю как сверстать на xaml то что в эскизном, думаю можно)
+    // думаю можно обойтись списком блоков (сейчас отображается только название пары)
+
+    // TODO: Надо заполнять currentSelectedButton и selectedDay в зависимости от текущего дня недели
     public partial class ScheduleViewModel : ObservableObject
     {
         [ObservableProperty]
         ObservableCollection<ScheduleButtonViewModel> buttons;
 
         [ObservableProperty]
-        private string date;
+        private Day selectedDay;
+
+        private Dictionary<string, Day> _days = new Dictionary<string, Day>();
 
         private int currentSelectedButton = 0;
 
@@ -21,26 +31,32 @@ namespace SafeDriving.ViewModel
         public ScheduleViewModel(IApi api)
         {
             _api = api;
-            Init();
+            Task.Run(Init);
         }
 
-        public async void Init()
+        public async Task Init()
         {
-            _api.SetAuthToken("0IwGWvhf%2Bd9UGa7wkj8qTyAM8vW86T7HPzV11B9GNLvxMTZgPEFWacFk%2BbO2lmIVpB4FZl3gw4Gl4vqwmhv0ZvDpXNe5XGYCIDnXsxi%2Ba74OZq1SuJFcSdEIbJ43v4CU8zWhSl4Wn1MG8EJNUiwHDy75090t7ym31uBCuOR2OyY%3D\\");
-            
             var schedule = await _api.GetSchedule("231-332");
 
             var list = new List<ScheduleButtonViewModel>();
 
-            for (int i = 1; i < 7; i++)
+            foreach (PropertyInfo property in typeof(Schedule).GetProperties())
             {
-                list.Add(new ScheduleButtonViewModel
+                if (property.PropertyType == typeof(Day))
                 {
-                    Background = Brush.Blue,
-                    DateTime = DateTime.Now,
-                    DayNumber = i.ToString(),
-                    Text = "Пн"
-                });
+                    var day = (Day)property.GetValue(schedule);
+
+                    var dayName = property.Name; // TODO: тут надо чтобы отображался не Monday, Tuesday ... а пн, вт итд
+
+                    _days.Add(dayName, day); 
+
+                    list.Add(new ScheduleButtonViewModel
+                    {
+                        Background = Brush.Blue,
+                        DayNumber = "1", // TODO: тут надо сделать чтобы отображался номер дня в месяце
+                        Text = dayName
+                    });
+                }
             }
 
             Buttons = new(list);
@@ -51,11 +67,10 @@ namespace SafeDriving.ViewModel
         async Task Tap(ScheduleButtonViewModel button)
         {
             await Task.Run(() => {
-                Date = button.DateTime.ToShortDateString();
                 button.Background = Brush.DarkBlue;
-
                 Buttons[currentSelectedButton].Background = Brush.Blue;
                 currentSelectedButton = Buttons.IndexOf(button);
+                SelectedDay = _days[button.Text];
             });
         }
     }
