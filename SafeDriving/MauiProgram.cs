@@ -7,6 +7,7 @@ using SafeDriving.ViewModel;
 
 namespace SafeDriving;
 
+//меняю что то 
 public static class MauiProgram
 {
 
