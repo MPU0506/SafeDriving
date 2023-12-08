@@ -27,6 +27,7 @@ namespace SafeDriving.ViewModel
             AvatarSource = user.Avatar;
             FullName = user.Name + user.Surname + user.Patronymic;
             // TODO Продолжить заполнять поля
+            //тест1
         }
     }
 }
