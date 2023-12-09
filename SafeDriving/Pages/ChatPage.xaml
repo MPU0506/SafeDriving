@@ -8,7 +8,7 @@
              Shell.NavBarIsVisible="False"
              BackgroundColor="#3A3A3A"
              Title="ChatPage">
-    <ScrollView>
+    
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
@@ -48,26 +48,39 @@
                 SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type viewmodel:MessageViewModel}">
-                        <Grid Margin="10">
+                        <Grid 
+                            Margin="10">
                             
-                            <FlexLayout 
-                                HorizontalOptions="{Binding Horizontal}"
-                                Direction="Column"   
-                                JustifyContent="Start"     
-                                AlignItems="Start">
+                            <Border 
+                                MaximumWidthRequest="250"
+                                BackgroundColor="DarkGray"
+                                HorizontalOptions="{Binding LayoutOptions}">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10" />
+                                </Border.StrokeShape>
+                                <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="36"/>
+                                </Grid.ColumnDefinitions>
+                                    
+                                    <Label 
+                                      Text="{Binding Body}"
+                                      LineBreakMode="WordWrap"
+                                      MaxLines="10"
+                                      Padding="10"/>
 
-                                <Label 
-                                    Text="{Binding Body}"
-                                    LineBreakMode="WordWrap"
-                                    MaxLines="10"
-                                    Padding="10"/>
-                                
-                                <Label 
-                                    Text="{Binding DateTime}"
-                                    LineBreakMode="WordWrap"
-                                    MaxLines="10"
-                                    Padding="10"/>
-                            </FlexLayout>
+                                    <Label 
+                                        FontSize="10"
+                                        Grid.Column="1"
+                                        VerticalOptions="End"
+                                        HorizontalOptions="End"
+                                        Text="{Binding DateTime}"
+                                        LineBreakMode="WordWrap"
+                                        MaxLines="10"
+                                        Padding="0,0,10,5"/>
+                                </Grid>
+                            </Border>
                         </Grid>
 
                     </DataTemplate>
@@ -95,5 +108,5 @@
                     BackgroundColor="Transparent"/>
             </Grid>
         </Grid>
-    </ScrollView>
+    
 </ContentPage>

@@ -14,20 +14,26 @@ namespace SafeDriving.ViewModel
                 new MessageViewModel
                 {
                     Body = "Привет",
-                    DateTime = DateTime.Now,
-                    Horizontal = "Start",
+                    DateTime = "23:12",
+                    LayoutOptions = LayoutOptions.Start,
                 },
                 new MessageViewModel
                 {
                     Body = "Здарова",
-                    DateTime = DateTime.Now.AddMinutes(1),
-                    Horizontal = "End",
+                    DateTime = "23:13",
+                   LayoutOptions = LayoutOptions.End,
                 },
                  new MessageViewModel
                 {
                     Body = "AKLSDJFKLASDJFLKJASDLKFJLASDKJFLKASDJFLKAJSDDLFKJASDLKFJSLADKJFLAKSDJFLKASDJFLKJASDLKFJASDLKJFKL",
-                    DateTime = DateTime.Now.AddMinutes(1),
-                    Horizontal = "Start",
+                    DateTime = "23:16",
+                    LayoutOptions = LayoutOptions.Start,
+                },
+                  new MessageViewModel
+                {
+                    Body = "AKLSDJFKLASDJFLKJASDLKFJLASDKJFLKASDJFLKAJSDDLFKJASDLKFJSLADKJFLAKSDJFLKASDJFLKJASDLKFJASDLKJFKL",
+                    DateTime = "23:18",
+                    LayoutOptions = LayoutOptions.End,
                 },
             };
 
