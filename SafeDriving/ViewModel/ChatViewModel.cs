@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 namespace SafeDriving.ViewModel
 {
     public partial class ChatViewModel : ObservableObject
@@ -7,8 +8,31 @@ namespace SafeDriving.ViewModel
         [ObservableProperty]
         ObservableCollection<MessageViewModel> messages;
 
+        [ObservableProperty]
+        ICommand commandClickSend;
+
+        [ObservableProperty]
+        string message;
+
         public ChatViewModel() 
         {
+
+            CommandClickSend = new Command(() => {
+
+                string formattedTime = DateTime.Now.ToString("HH:mm");
+
+                Messages.Add(new MessageViewModel()
+                {
+                    Body = Message,
+                    DateTime = formattedTime,
+                    LayoutOptions = LayoutOptions.End,
+                });
+
+                Message = string.Empty;
+            });
+
+
+
             var list = new List<MessageViewModel>
             {
                 new MessageViewModel

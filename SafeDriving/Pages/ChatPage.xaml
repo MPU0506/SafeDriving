@@ -95,6 +95,7 @@
 
                 <Entry
                     HeightRequest="40"
+                    Text="{Binding Message}"
                     Placeholder="Введите сообщение"
                     Margin="5"/>
 
@@ -105,6 +106,7 @@
                     HeightRequest="40"
                     Padding="5"
                     TextColor="White"
+                    Command="{Binding CommandClickSend}"
                     BackgroundColor="Transparent"/>
             </Grid>
         </Grid>
