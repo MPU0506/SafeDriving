@@ -16,6 +16,7 @@
 
         <Label
             TextColor="#6390E4"
+            FontSize="24"
             HorizontalOptions="Center"
             VerticalOptions="Center"
             Text="Чаты"/>
@@ -23,34 +24,52 @@
 
         <CollectionView 
             Grid.Row="1"
+            
             ItemsSource="{Binding Chats}"
             VerticalScrollBarVisibility="Never"
             SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout 
+                    Orientation="Vertical"
+                    ItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+
             <CollectionView.ItemTemplate>
-                
                 <DataTemplate x:DataType="{x:Type viewmodel:ChatItemViewModel}">
-                    <Border 
-                        
-                        Margin="10,10,10,0"
-                        BackgroundColor="#2E2F2E">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="10" />
-                        </Border.StrokeShape>
-                        <Grid Margin="20">
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                    CommandParameter="{Binding .}"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListChatsViewModel}}, Path=TapItemCommand}"/>
-                            </Grid.GestureRecognizers>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Label Text="{Binding ChatName}"/>
-                            <Label LineBreakMode="TailTruncation" Grid.Row="1" Text="{Binding LastMessage}"/>
-                        </Grid>
-                    </Border>
-                  
+                    <Grid Margin="10,0,10,0">
+                        <Border BackgroundColor="#2E2F2E">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+                            <Grid Margin="10">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        CommandParameter="{Binding .}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListChatsViewModel}}, Path=TapItemCommand}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="40"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Label Text="{Binding ChatName}"/>
+                                    <Label LineBreakMode="TailTruncation" Grid.Row="1" Text="{Binding LastMessage}"/>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Label IsVisible="{Binding MyMessage}" Text="🗸" HorizontalOptions="End" VerticalOptions="Start"/>
+                                    <Label Grid.Row="1" Text="{Binding Time}" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

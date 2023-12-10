@@ -39,24 +39,30 @@ namespace SafeDriving.ViewModel
                 {
                     Body = "Привет",
                     DateTime = "23:12",
-                    LayoutOptions = LayoutOptions.Start,
+                    LayoutOptions = LayoutOptions.End,
                 },
                 new MessageViewModel
                 {
                     Body = "Здарова",
                     DateTime = "23:13",
-                   LayoutOptions = LayoutOptions.End,
+                   LayoutOptions = LayoutOptions.Start,
                 },
                  new MessageViewModel
                 {
-                    Body = "AKLSDJFKLASDJFLKJASDLKFJLASDKJFLKASDJFLKAJSDDLFKJASDLKFJSLADKJFLAKSDJFLKASDJFLKJASDLKFJASDLKJFKL",
+                    Body = "Как день прошел?",
                     DateTime = "23:16",
-                    LayoutOptions = LayoutOptions.Start,
+                    LayoutOptions = LayoutOptions.End,
                 },
                   new MessageViewModel
                 {
-                    Body = "AKLSDJFKLASDJFLKJASDLKFJLASDKJFLKASDJFLKAJSDDLFKJASDLKFJSLADKJFLAKSDJFLKASDJFLKJASDLKFJASDLKJFKL",
+                    Body = "К сожалению, я не имею личного опыта или способности оценить текущее время, так как я просто программный код, созданный для обработки текстовой информации и предоставления ответов на вопросы.",
                     DateTime = "23:18",
+                    LayoutOptions = LayoutOptions.Start,
+                },
+                   new MessageViewModel
+                {
+                    Body = "Жалко. Ну ладно, хорошего дня!",
+                    DateTime = "14:31",
                     LayoutOptions = LayoutOptions.End,
                 },
             };

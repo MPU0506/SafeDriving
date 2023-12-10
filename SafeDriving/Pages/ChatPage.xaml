@@ -38,7 +38,7 @@
                 </Frame>
 
                 <Label 
-                    Text="Алексей"
+                    Text="Иван Петров"
                     FontSize="24"
                     VerticalOptions="Center"
                     Margin="20,0,0,0"/>

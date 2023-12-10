@@ -23,6 +23,10 @@ namespace SafeDriving.ViewModel
         [ObservableProperty]
         ICommand clickSchedule;
 
+
+        [ObservableProperty]
+        ICommand clickMap;
+
         public AccountViewModel(UserService userService)
         {
             _userService = userService;
@@ -31,8 +35,13 @@ namespace SafeDriving.ViewModel
                 await Shell.Current.GoToAsync($"{nameof(ListChatsPage)}");
             });
 
-            ClickSchedule = new Command(async () => {
+            ClickSchedule = new Command(async () =>
+            {
                 await Shell.Current.GoToAsync($"{nameof(SchedulePage)}");
+            });
+
+            ClickMap = new Command(async () => {
+                await Shell.Current.GoToAsync($"{nameof(MapPage)}");
             });
 
             

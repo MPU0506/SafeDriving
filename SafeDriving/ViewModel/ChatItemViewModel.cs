@@ -11,5 +11,11 @@ namespace SafeDriving.ViewModel
 
         [ObservableProperty]
         string lastMessage;
+
+        [ObservableProperty]
+        string time;
+
+        [ObservableProperty]
+        bool myMessage;
     }
 }

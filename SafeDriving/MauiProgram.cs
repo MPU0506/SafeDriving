@@ -47,7 +47,8 @@ public static class MauiProgram
         builder.Services.AddTransient<SchedulePage>();
         builder.Services.AddTransient<ScheduleViewModel>();
 
-
+        builder.Services.AddTransient<MapPage>();
+        builder.Services.AddTransient<MapViewModel>();
 
 
 #if DEBUG

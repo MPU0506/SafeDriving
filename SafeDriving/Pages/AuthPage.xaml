@@ -96,6 +96,13 @@
                 Command="{Binding ClickLogin}"
                 TextColor="White"/>
 
+            <Button
+                Margin="40,20,40,0"
+                Text="Войти без регистрации"
+                FontAttributes="Bold"
+                BackgroundColor="#6390E4"
+                TextColor="White"/>
+
         </StackLayout>
     </ScrollView>
 </ContentPage>
