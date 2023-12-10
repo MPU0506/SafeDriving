@@ -21,23 +21,18 @@ namespace SafeDriving.ViewModel
         ObservableCollection<ScheduleButtonViewModel> buttons;
 
         [ObservableProperty]
-
         private Day selectedDay;
-        public static Day Monday { get; private set; }
-        public static Day Tuesday { get; private set; }
-        public static Day Wednesday { get; private set; }
-        public static Day Thursday { get; private set; }
-        public static Day Friday { get; private set; }
-        public static Day Saturday { get; private set; }
+        
+        private int currentSelectedButton = 0;
 
-        private Dictionary<Day, string> _days = new Dictionary<Day, string>()
+        private Dictionary<string, string> _days = new Dictionary<string, string>()
         {
-            { Monday, "Пн"},
-            { Tuesday, "Вт"},
-            { Wednesday, "Ср"},
-            { Thursday, "Чт"},
-            { Friday, "Пт"},
-            { Saturday, "Сб"}
+            { "Monday", "Пн"},
+            { "Tuesday", "Вт"},
+            { "Wednesday", "Ср"},
+            { "Thursday" , "Чт"},
+            { "Friday", "Пт"},
+            { "Saturday", "Сб"}
         };
 
         private readonly IApi _api;
@@ -53,72 +48,48 @@ namespace SafeDriving.ViewModel
 
             var list = new List<ScheduleButtonViewModel>();
 
+            var now = DateTime.Now.AddDays(-1);
+            DateTime monday = now.AddDays(-(int)now.DayOfWeek + (int)DayOfWeek.Monday).Date;
+            var dayNumber = monday.Day;
+
+
             foreach (PropertyInfo property in typeof(Schedule).GetProperties())
             {
                 if (property.PropertyType == typeof(Day))
                 {
-                    
                     var day = (Day)property.GetValue(schedule);
-                    var dayName = property.Name; // TODO: тут надо чтобы отображался не Monday, Tuesday ... а пн, вт итд
-                    
-                    _days.Add(dayName, _days[SelectedDay]);
 
+                    var dayName = _days[property.Name]; 
+                    
                     list.Add(new ScheduleButtonViewModel
                     {
-                        Background = Brush.Blue,
-
-                        DayNumber = SelectedDay.ToString(), // TODO: тут надо сделать чтобы отображался номер дня в месяце
+                        Background = Brush.Transparent,
+                        DayNumber = (dayNumber++).ToString(), // TODO: тут надо сделать чтобы отображался номер дня в месяце
                         Text = dayName,
+                        Day = day,
                     }); ;
                 }
             }
 
+            currentSelectedButton = (int) DateTime.Now.DayOfWeek - 1;
+
+            if(currentSelectedButton == -1) currentSelectedButton = 0;
+
+            var selectedB = list[currentSelectedButton];
+            selectedB.Background = Brush.Blue;
+            SelectedDay = selectedB.Day;
             Buttons = new(list);
         }
 
-        int currentSelectedButton;
         [RelayCommand]
         async Task Tap(ScheduleButtonViewModel button)
         {
             await Task.Run(() =>
             {
-                button.Background = Brush.DarkBlue;
-                Buttons[currentSelectedButton].Background = Brush.Blue;
-
-                DateTime currentDate = DateTime.Today;
-                DayOfWeek currentDayOfWeek = currentDate.DayOfWeek;
-
-                switch (currentDayOfWeek)
-                {
-                    case DayOfWeek.Monday:
-                        currentSelectedButton = 0;
-                        SelectedDay = "Monday";
-                        break;
-                    case DayOfWeek.Tuesday:
-                        currentSelectedButton = 1;
-                        SelectedDay = "Tuesday";
-                        break;
-                    case DayOfWeek.Wednesday:
-                        currentSelectedButton = 2;
-                        SelectedDay = "Wednesday";
-                        break;
-                    case DayOfWeek.Thursday:
-                        currentSelectedButton = 3;
-                        SelectedDay = "Thursday";
-                        break;
-                    case DayOfWeek.Friday:
-                        currentSelectedButton = 4;
-                        SelectedDay = "Friday";
-                        break;
-                    case DayOfWeek.Saturday:
-                        currentSelectedButton = 5;
-                        SelectedDay = "Saturday";
-                        break;
-                    case DayOfWeek.Sunday:
-                        currentSelectedButton = 6;
-                        SelectedDay = "Sunday";
-                        break;
-                }
+                SelectedDay = button.Day;
+                button.Background = Brush.Blue;
+                Buttons[currentSelectedButton].Background = Brush.Transparent;
+                currentSelectedButton = Buttons.IndexOf(button);
             });
         }
     }

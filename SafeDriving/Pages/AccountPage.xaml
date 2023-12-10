@@ -71,6 +71,7 @@
                         <ImageButton
                             Margin="0,10,0,0"
                             HeightRequest="50"
+                            Command="{Binding ClickChat}"
                             VerticalOptions="Center"
                             HorizontalOptions="Center"
                             BackgroundColor="Transparent"
@@ -123,6 +124,7 @@
                         <ImageButton
                             Margin="0,10,0,0"
                             HeightRequest="50"
+                            Command="{Binding ClickSchedule}"
                             VerticalOptions="Center"
                             HorizontalOptions="Center"
                             BackgroundColor="Transparent"

@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SafeDriving.Pages;
 using SafeDriving.Service;
+using System.Windows.Input;
 
 namespace SafeDriving.ViewModel
 {
@@ -15,14 +17,32 @@ namespace SafeDriving.ViewModel
 
         private readonly UserService _userService;
 
+        [ObservableProperty]
+        ICommand clickChat;
+
+        [ObservableProperty]
+        ICommand clickSchedule;
+
         public AccountViewModel(UserService userService)
         {
             _userService = userService;
+
+            ClickChat = new Command(async () => {
+                await Shell.Current.GoToAsync($"{nameof(ListChatsPage)}");
+            });
+
+            ClickSchedule = new Command(async () => {
+                await Shell.Current.GoToAsync($"{nameof(SchedulePage)}");
+            });
+
+            
+
             Task.Run(Init);
         }
 
         private async Task Init()
         {
+
             var user = _userService.Getuser();
             AvatarSource = user.Avatar;
             FullName = user.Name + user.Surname + user.Patronymic;
