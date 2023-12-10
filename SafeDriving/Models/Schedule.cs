@@ -1,5 +1,6 @@
 ﻿namespace SafeDriving.Models
 {
+
     public class Schedule
     {
         public Day Monday { get; set; }
