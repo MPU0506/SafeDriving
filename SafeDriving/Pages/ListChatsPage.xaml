@@ -4,11 +4,57 @@
              x:Class="SafeDriving.Pages.ListChatsPage"
              xmlns:viewmodel="clr-namespace:SafeDriving.ViewModel"
              x:DataType="viewmodel:ListChatsViewModel"
+              NavigationPage.HasBackButton="False"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#3A3A3A"
              Title="ListChatsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label
+            TextColor="#6390E4"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Text="Чаты"/>
+
+
+        <CollectionView 
+            Grid.Row="1"
+            ItemsSource="{Binding Chats}"
+            VerticalScrollBarVisibility="Never"
+            SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                
+                <DataTemplate x:DataType="{x:Type viewmodel:ChatItemViewModel}">
+                    <Border 
+                        
+                        Margin="10,10,10,0"
+                        BackgroundColor="#2E2F2E">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+                        <Grid Margin="20">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    CommandParameter="{Binding .}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ListChatsViewModel}}, Path=TapItemCommand}"/>
+                            </Grid.GestureRecognizers>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding ChatName}"/>
+                            <Label LineBreakMode="TailTruncation" Grid.Row="1" Text="{Binding LastMessage}"/>
+                        </Grid>
+                    </Border>
+                  
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+    </Grid>
 </ContentPage>
