@@ -95,7 +95,13 @@
                                 <Grid  Margin="10,10,10,10">
                                     <Frame BackgroundColor="#2E2F2E">
                                         <Grid>
-                                            <Label Grid.Row="0" Text="{Binding Name}"/>
+                                            <StackLayout>
+                                                <Label Text="{Binding Name}"/>
+                                                <Label Text="{Binding TimeInterval}"/>
+                                                <Label Text="{Binding Place}"/>
+                                                <Label Text="{Binding Rooms[0]}"/>
+                                                <Label Text="{Binding Teachers[0]}"/>
+                                            </StackLayout>
                                         </Grid>
                                     </Frame>
                                 </Grid>

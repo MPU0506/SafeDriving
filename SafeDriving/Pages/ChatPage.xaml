@@ -16,30 +16,43 @@
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
-            <Grid BackgroundColor="#2E2F2E">
-                <StackLayout Orientation="Horizontal">
-                    <Frame 
-                        Margin="20,0,0,0"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        Padding="0,0,0,0"
-                        CornerRadius="600">
-                        <Image
-                            WidthRequest="50"
-                            HeightRequest="50"
-                            Margin="0,0,0,0"
-                            Aspect="AspectFill"
-                            Source="https://www.zoopicture.ru/assets/2011/01/4502565386_d2691e32a4.jpg"/>
-                    </Frame>
+        <Grid BackgroundColor="#2E2F2E">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
 
-                    <Label 
-                        Text="Алексей"
-                        FontSize="24"
-                        VerticalOptions="Center"
-                        Margin="20,0,0,0"/>
+            <StackLayout Orientation="Horizontal">
+                <Frame 
+                    Margin="20,0,0,0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Padding="0,0,0,0"
+                    CornerRadius="600">
+                    <Image
+                        WidthRequest="50"
+                        HeightRequest="50"
+                        Margin="0,0,0,0"
+                        Aspect="AspectFill"
+                        Source="https://www.zoopicture.ru/assets/2011/01/4502565386_d2691e32a4.jpg"/>
+                </Frame>
 
-                </StackLayout>
-            </Grid>
+                <Label 
+                    Text="Алексей"
+                    FontSize="24"
+                    VerticalOptions="Center"
+                    Margin="20,0,0,0"/>
+
+            </StackLayout>
+
+            <ImageButton
+                Padding="18"
+                BackgroundColor="Transparent"
+                BorderColor="Transparent"
+                Source="telephone.png"
+                
+                Grid.Column="1"/>
+        </Grid>
 
             <CollectionView 
                 Grid.Row="1"
