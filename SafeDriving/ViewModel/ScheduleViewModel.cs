@@ -22,7 +22,6 @@ namespace SafeDriving.ViewModel
 
         [ObservableProperty]
 
-        //вот 1
         private Day selectedDay;
         public static Day Monday { get; private set; }
         public static Day Tuesday { get; private set; }
@@ -31,16 +30,16 @@ namespace SafeDriving.ViewModel
         public static Day Friday { get; private set; }
         public static Day Saturday { get; private set; }
 
-        private Dictionary<string, Day> _days = new Dictionary<string, Day>()
+        private Dictionary<Day, string> _days = new Dictionary<Day, string>()
         {
-            { "Пн" , Monday},
-            { "Вт" , Tuesday},
-            { "Ср", Wednesday},
-            { "Чт", Thursday},
-            { "Пт", Friday},
-            { "Сб", Saturday}
+            { Monday, "Пн"},
+            { Tuesday, "Вт"},
+            { Wednesday, "Ср"},
+            { Thursday, "Чт"},
+            { Friday, "Пт"},
+            { Saturday, "Сб"}
         };
-        //вот 1 закончилось
+
         private readonly IApi _api;
 
         public ScheduleViewModel(IApi api)
@@ -62,14 +61,14 @@ namespace SafeDriving.ViewModel
                     var day = (Day)property.GetValue(schedule);
                     var dayName = property.Name; // TODO: тут надо чтобы отображался не Monday, Tuesday ... а пн, вт итд
                     
-                    _days.Add(dayName, day);
+                    _days.Add(dayName, _days[SelectedDay]);
 
                     list.Add(new ScheduleButtonViewModel
                     {
                         Background = Brush.Blue,
 
-                        DayNumber = _days.ToString(), // TODO: тут надо сделать чтобы отображался номер дня в месяце
-                        Text = SelectedDay.ToString(),
+                        DayNumber = SelectedDay.ToString(), // TODO: тут надо сделать чтобы отображался номер дня в месяце
+                        Text = dayName,
                     }); ;
                 }
             }
@@ -77,7 +76,6 @@ namespace SafeDriving.ViewModel
             Buttons = new(list);
         }
 
-        //вот 2
         int currentSelectedButton;
         [RelayCommand]
         async Task Tap(ScheduleButtonViewModel button)
@@ -86,46 +84,42 @@ namespace SafeDriving.ViewModel
             {
                 button.Background = Brush.DarkBlue;
                 Buttons[currentSelectedButton].Background = Brush.Blue;
-                currentSelectedButton = Buttons.IndexOf(button);
 
-                // Получение текущего дня недели
-                DateTime currentDate = DateTime.Now;
+                DateTime currentDate = DateTime.Today;
                 DayOfWeek currentDayOfWeek = currentDate.DayOfWeek;
 
-                // Установка значений currentSelectedButton и selectedDay в зависимости от текущего дня недели
                 switch (currentDayOfWeek)
                 {
                     case DayOfWeek.Monday:
                         currentSelectedButton = 0;
-                        SelectedDay = _days["Monday"];
+                        SelectedDay = "Monday";
                         break;
                     case DayOfWeek.Tuesday:
                         currentSelectedButton = 1;
-                        SelectedDay = _days["Tuesday"];
+                        SelectedDay = "Tuesday";
                         break;
                     case DayOfWeek.Wednesday:
                         currentSelectedButton = 2;
-                        SelectedDay = _days["Wednesday"];
+                        SelectedDay = "Wednesday";
                         break;
                     case DayOfWeek.Thursday:
                         currentSelectedButton = 3;
-                        SelectedDay = _days["Thursday"];
+                        SelectedDay = "Thursday";
                         break;
                     case DayOfWeek.Friday:
                         currentSelectedButton = 4;
-                        SelectedDay = _days["Friday"];
+                        SelectedDay = "Friday";
                         break;
                     case DayOfWeek.Saturday:
                         currentSelectedButton = 5;
-                        SelectedDay = _days["Saturday"];
+                        SelectedDay = "Saturday";
                         break;
                     case DayOfWeek.Sunday:
                         currentSelectedButton = 6;
-                        SelectedDay = _days["Sunday"];
+                        SelectedDay = "Sunday";
                         break;
                 }
             });
         }
-        //вот 1 закончилось
     }
 }
